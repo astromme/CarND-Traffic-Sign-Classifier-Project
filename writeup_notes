@@ -1,0 +1,23 @@
+LeNet defaults: 0.89 accuracy
+Grayscale: 0.89
+
+0.0001 learning rate, 30 epochs: 0.868
+
+
+Things to try:
+ * create fake images with modified contrast
+ * create fake images with modified brightness
+ * change the stride
+ * change the kernel
+ * duplicate images for under-represented labels to have the same number of images per label
+ * preprocess to grayscale
+ * reduce learning rate
+ * run for 100x epochs
+ * increase parameters (underfitting?)
+ * decrease parameters (overfitting?)
+ * add dropout
+ * add regularization
+ * make deeper
+ * add 1x1 convolution for non-linearity
+ * read http://yann.lecun.com/exdb/publis/pdf/sermanet-ijcnn-11.pdf and apply some of their techniques
+ * increase batch size by 10xs
