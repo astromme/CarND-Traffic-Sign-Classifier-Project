@@ -19,14 +19,21 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[visualization1]: ./examples/visualization.jpg "Visualization"
+[grayscaling]: ./examples/grayscale.jpg "Grayscaling"
+[random_noise]: ./examples/random_noise.jpg "Random Noise"
+
+[image1]: ./test_photos/image1.png "Test Traffic Sign 1"
+[image2]: ./test_photos/image2.png "Test Traffic Sign 2"
+[image3]: ./test_photos/image3.png "Test Traffic Sign 3"
+[image4]: ./test_photos/image4.png "Test Traffic Sign 4"
+[image5]: ./test_photos/image5.png "Test Traffic Sign 5"
+[image6]: ./test_photos/image6.png "Test Traffic Sign 6"
+[image7]: ./test_photos/image7.png "Test Traffic Sign 7"
+[image8]: ./test_photos/image8.png "Test Traffic Sign 8"
+[image9]: ./test_photos/image9.png "Test Traffic Sign 9"
+[image10]: ./test_photos/image10.png "Test Traffic Sign 10"
+[image11]: ./test_photos/image11.png "Test Traffic Sign 11"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -60,6 +67,33 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 ###Design and Test a Model Architecture
 
 ####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
+
+
+My most successful model architecture and data processing steps are actually very simple. The data processing converts images to grayscale and normalizes values to the range [-1, 1]. The model has two convolutional layers each followed by max pooling, dropout, and relu activation. Finally there are two fully connected layers, each having relu activation. This produced an accuracy of 93% on the validation dataset.
+
+I tried other data augmentation, but this failed to increase the accuracy past 93%. Specifically, I tried generating 5x additional training data with random jitter including:
+
+* translations (mean: 0.0, sigma: 2.0 pixels)
+* rotations (mean: 0.0, sigma: 10.0 degrees)
+* scale (mean: 1.0, sigma: 0.1x)
+* brightness
+* contrast
+
+This seemed to reduce overfitting because now the training set accuracy was below the test set accuracy, but never surpassed 93% accuracy even after thousands of epochs.
+
+I also tried more complicated networks, including the following:
+
+* 3 convolution layers instead of two
+* connecting the outputs of the last two convolutions to the fully connected output layers, rather than just the last convolution
+* changing dropout keep_prob between 0.5 and 1.0
+* changing the depth of each convolutional layer (e.g. double, half)
+* changing the number of fully connected units (e.g. double, half)
+* removing the max_pool layers
+* changing the kernel size of the convolutional layers to 3,3 instead of 5,5
+* changing the padding from VALID to SAME
+* 
+
+To help understand the results better, I also added tensorboard integration and logged summaries of the convolutional variables & the validation & training error/loss.
 
 As a first step, I decided to convert the images to grayscale because ...
 
@@ -100,7 +134,14 @@ My final model consisted of the following layers:
 
 ####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+Hyperparameters:
+
+|Hyperparemter|Value|Notes| 
+|:-----------:|:---:|:---:|
+|Batch size   |2048 |This is close to the maximum that fits on my GPU|
+|Epochs       |1000 |
+|Learning Rate|0.001|Decreasing this didn't seem to increase the accuracy|
+
 
 ####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -134,6 +175,9 @@ Here are five German traffic signs that I found on the web:
 The first image might be difficult to classify because ...
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+
+
+resample...
 
 Here are the results of the prediction:
 
