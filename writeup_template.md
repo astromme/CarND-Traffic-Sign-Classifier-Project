@@ -157,6 +157,10 @@ Here are 9 German traffic signs that I found on the web:
 ![alt text][image4] ![alt text][image5]![alt text][image6] ![alt text][image7] ![alt text][image8]
 ![alt text][image9]
 
+These images should be straightforward to classify. The signs aren't covered up, and the backgrounds are mostly distinct from the signs. If the classifier can't classify these, it's a bad sign (pun not intended). 
+
+Other things of note: They represent a variety of classes. Some signs are similar such as speed limit 20km/h and speed limit 60km/h. Images 6 and 7 have portions of a second sign which might confuse the classifier.
+
 Here are the results of the prediction:
 
 | Image			        |     Prediction	        					|
